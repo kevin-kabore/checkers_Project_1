@@ -6,9 +6,9 @@ I will be using HTML, CSS, Javascript, and the jQuery library to build my projec
 
 MVP includes:
 
-- Game Board & Pieces
+- Game Board & pieces
 - Pieces move successfully
 - Turns alternate
-- Cannot make falso moves
+- Cannot make invalid moves
 - Win logic works & is consistent with checkers game win logic
 
