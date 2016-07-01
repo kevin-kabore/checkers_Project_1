@@ -9,5 +9,6 @@ MVP includes:
 - Game Board & Pieces
 - Pieces move successfully
 - Turns alternate
+- Cannot make falso moves
 - Win logic works & is consistent with checkers game win logic
 
