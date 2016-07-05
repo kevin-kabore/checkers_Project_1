@@ -10,3 +10,11 @@ td{
   width: 100px;
   height: 70px;
 }
+
+.black {
+  background: black;
+}
+
+.red {
+  background-color: red;
+}
