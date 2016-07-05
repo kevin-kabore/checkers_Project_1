@@ -1,4 +1,8 @@
 // console.log("Javascript connected");
+// <img src="' + src + '" />'
+
+var $blackPiece = "url('assets/black_piece.png')"
+
 var board = []
 function createTable() {
   var $table = $('table')
@@ -21,10 +25,16 @@ function colorBoard(){
     for (var j = 0; j < board.length; j++) {
       if ((i+j)%2) {
         board[i][j].addClass('black');
-        // if i between 0 & 2 add piece
+
+        if (i < 2 ) {
+
+        }
       } else {
         board[i][j].addClass('red');
         //if 5 & 7 add a piece
+        if ( i >= 5 && i <=  7) {
+          board[i][j].css('background-image', $blackPiece);
+        }
       }
     }
   }

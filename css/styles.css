@@ -18,3 +18,7 @@ td{
 .red {
   background-color: red;
 }
+
+.tile{
+  background-size: cover;
+}
