@@ -22,3 +22,11 @@ td{
 .tile{
   background-size: cover;
 }
+
+.whitePieces{
+  background-image: url("../assets/white_piece.png");
+}
+
+.blackPieces{
+  background-image : url("../assets/black_piece.png");
+}
