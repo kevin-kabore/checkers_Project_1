@@ -12,3 +12,6 @@ MVP includes:
 - Cannot make invalid moves
 - Win logic works & is consistent with checkers game win logic
 
+
+
+###Trello board: https://trello.com/b/q5g6nd3V/project-1-checkers
