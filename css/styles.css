@@ -1,14 +1,32 @@
 
 h1{
   text-align: center;
+  margin-bottom: 5px;
 }
-table {
+table{
   margin:auto;
+}
+
+button{
+  margin: 0 47% 10px 47%
 }
 td{
   border: 1px solid black;
   width: 60px;
   height: 60px;
+}
+section{
+  border: 1px solid black;
+  width: 60px;
+  height: 30px;
+}
+
+#right{
+  float: right;
+}
+
+#left{
+  float: left;
 }
 
 .black {
