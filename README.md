@@ -1,13 +1,13 @@
 # Checkers
 ==========
 
-# Game Description & Rules
+###Game Description & Rules
 Checkers is a two player game in which both players compete against each other by trying to capture all of the opponent's pieces.
 Players move their pieces by advancing them diagonally. They can capture their opponents pieces by "jumping" over them to an open position.
 A player wins when he/she captures all of his opponent's pieces.
 
 
-#Technologies Used
+###Technologies Used
 - HTML
 - CSS
 - Javascript
