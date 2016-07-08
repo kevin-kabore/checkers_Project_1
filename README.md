@@ -1,8 +1,17 @@
 # Checkers
 ==========
 
-This is a checkers game I'm making for my first project at General Assembly in the Web Development Immersive course.
-I will be using HTML, CSS, Javascript, and the jQuery library to build my project. I will also be using Trello to keep track of my changes, progress, and features for my project and MVP.
+# Game Description & Rules
+Checkers is a two player game in which both players compete against each other by trying to capture all of the opponent's pieces.
+Players move their pieces by advancing them diagonally. They can capture their opponents pieces by "jumping" over them to an open position.
+A player wins when he/she captures all of his opponent's pieces.
+
+
+#Technologies Used
+- HTML
+- CSS
+- Javascript
+- JQuery
 
 MVP includes:
 
