@@ -1,11 +1,12 @@
-# Checkers
+#[Checkers](https://kevin-kabore.github.io/checkers_Project_1)
 ----------------
 
-#### Game description & rules
-Checkers is a two player game in which both players compete against each other by trying to capture all of the opponent's pieces.
-Players move their pieces by advancing them diagonally. They can capture their opponents pieces by "jumping" over them to an open position.
-A player wins when he/she captures all of his opponent's pieces.
+#### About the Game
+Checkers is a two player game in which players compete against each other by trying to capture all of their opponent's pawns.
+Players move their pawns by advancing them diagonally. They can capture their opponents pawns by "jumping" over them to an open position.
+A player wins when he/she captures all of his opponent's pawns.
 
+#####[Check out the game here](https://kevin-kabore.github.io/checkers_Project_1/)
 
 ##### rules
 - Player 1 (black) starts the game
@@ -33,4 +34,4 @@ are next steps.
 ###Trello board: https://trello.com/b/q5g6nd3V/project-1-checkers
 
 ### Wireframe
-![Breakout Wireframe](assets/IMG_3266)
+[Breakout Wireframe](assets/IMG_3266.JPG)
