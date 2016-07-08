@@ -1,6 +1,3 @@
-// console.log("Javascript connected");
-
-
 var $board = []
 var whiteCounter = 1;
 var blackCounter = 1;
@@ -14,12 +11,12 @@ var blackPiecesTaken = 0;
 
 //Creates table cells
 function createTable() {
-  var $table = $('table')
+  var $table = $("table")
   for (var i = 0; i < 8; i++) {
-    var $newTr = $('<tr>')
+    var $newTr = $("<tr>")
     $board.push([])
     for (var j = 0; j < 8; j++) {
-      var $newTD = $('<td>')
+      var $newTD = $("<td>")
       $newTD.addClass("tile")
       $newTr.append($newTD);
       $board[i].push($newTD) //Add to board array
@@ -49,21 +46,15 @@ function setBoard(){
           if (blackCounter%2 && whiteCounter%2){
             var row = this.id.split("")[0]
             var col = this.id.split("")[1]
-            console.log(this.id.split(""));
-
             var clickedRow = parseInt(row)
             var clickedCol = parseInt(col)
             validDiagonalsW = [];
             validDiagonalsB = [];
             validDiagonalsW.push((clickedRow+1)+""+(clickedCol+1), (clickedRow+1)+""+(clickedCol-1));
             validDiagonalsB.push((clickedRow-1)+""+(clickedCol+1), (clickedRow-1)+""+(clickedCol-1));
-            console.log('diagonal arrays set!');
-            console.log(validDiagonalsB);
           }
-
           //Make a move on click
           makeMove(this)})
-
         // sets board pieces
         if ( i >= 5 && i <=  7) {
           $board[i][j].addClass('blackPieces');
@@ -85,25 +76,19 @@ function makeMove(elem){
         function takeBlackPiece(){
           var attemptRow = thisId[0]
           var attemptCol = thisId[1]
-
           var avgCol = ((parseInt(startingCol) + parseInt(attemptCol)) / 2)
           var avgRow = ((parseInt(startingRow)+parseInt(attemptRow))/2);
-
           var jump = "" + avgRow+''+avgCol
-
-          if ($('#'+jump).hasClass('blackPieces')) { //win move valid
-            $('#'+jump).removeClass('blackPieces'); //remove
+          if ($('#'+jump).hasClass("blackPieces")) { //win move valid
+            $('#'+jump).removeClass("blackPieces"); //remove
             blackPiecesTaken = blackPiecesTaken + 1;
             $("#blackPiecesTaken").html(blackPiecesTaken)
             if (blackPiecesTaken == 12) {
               alert("Player 2 wins!")
             }
-            console.log(blackPiecesTaken);
-
             $(click).addClass("whitePieces");
             whiteCounter = whiteCounter + 1;
             turn++;
-            console.log("It's Player 1's turn");
         }
       }
         function takeWhitePiece (){
@@ -127,58 +112,41 @@ function makeMove(elem){
             console.log("It's Player 2's turn");
         }
         }
-
-
-
   if (turn % 2) {
     //Player 2 first click
     if ($(click).hasClass("whitePieces") && (whiteCounter%2 !== 0)) {
         startingRow = thisId[0] //store row
         startingCol = thisId[1] //store col
-
-
         $(click).removeClass("whitePieces"); //remove
         whiteCounter = whiteCounter +1; // increment click count
-
         //on Player 2 second click
       } else if(!$(click).hasClass('whitePieces') && whiteCounter%2 == 0) {
-
         //if red space, not on black piece, and move is diagonal, add white piece
           if ($(click).hasClass("red") && !$(click).hasClass("blackPieces") && (validDiagonalsW.indexOf($(click)[0].id) !== -1)) {
-
             $(click).addClass("whitePieces")
             whiteCounter = whiteCounter + 1;
             turn++;
-            console.log("It's Player 1's turn");
          } else if ($(click).hasClass("red") && !$(click).hasClass("blackPieces")) {
-            //check if there is a blackPiece in the middle
-            takeBlackPiece()
+            takeBlackPiece() //run function to check for capture
             }
         } else if ($(click).hasClass("blackPieces")) {
           alert("Sorry, it's not your turn.");
         }
-      // else on black's turn
-  } else {
-    // on 1st click if on black piece, remove piece, store starting spot
+
+  } else { // else on black's turn
+    // on Player 1's 1st click
     if ($(click).hasClass("blackPieces") && (blackCounter%2 !== 0)) {
       startingRow = thisId[0]
       startingCol = thisId[1]
       $(click).removeClass("blackPieces");
       blackCounter= blackCounter + 1;
-
-      //on second click for black
-      // if does not have black piece and is the second move for black
+    //on Player 2's seconf click
     } else if(!$(click).hasClass('blackPieces') && blackCounter%2 == 0) {
-
         //if red space, not on white piece, and move is diagonal, add black piece
         if ($(click).hasClass("red") && !($(click).hasClass("whitePieces")) && (validDiagonalsB.indexOf($(click)[0].id) !== -1)){
           $(click).addClass("blackPieces")
           blackCounter = blackCounter +1;
           turn++;
-          console.log("It's Player 2's turn");
-          //When click on other red spots
-          //check if there is a white piece in the middle and remove it
-          //by checking the properties
         } else if ($(click).hasClass("red") && !($(click).hasClass("whitePieces"))) {
           takeWhitePiece()
           }

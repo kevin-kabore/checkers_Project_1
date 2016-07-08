@@ -31,15 +31,15 @@ section{
 
 #right{
   float: right;
-  margin-top: 7%;
-  margin-right: 10%
+  margin-top: 15%;
+  margin-right: 15%
 }
 
 #left{
   color:white;
   float: left;
-  margin-top: 23%;
-  margin-left: 10%
+  margin-top: 15%;
+  margin-left: 15%
 }
 
 .black {
