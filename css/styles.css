@@ -1,3 +1,7 @@
+body{
+  background-color: F0F4F5;
+}
+
 
 h1{
   text-align: center;
@@ -17,16 +21,25 @@ td{
 }
 section{
   border: 1px solid black;
-  width: 60px;
-  height: 30px;
+  border-radius: 15px;
+  width: 100px;
+  height: 120px;
+  font-weight: bold;
+  text-align: center;
+
 }
 
 #right{
   float: right;
+  margin-top: 7%;
+  margin-right: 10%
 }
 
 #left{
+  color:white;
   float: left;
+  margin-top: 23%;
+  margin-left: 10%
 }
 
 .black {

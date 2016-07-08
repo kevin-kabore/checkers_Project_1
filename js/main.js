@@ -12,8 +12,7 @@ var validDiagonalsB = [];
 var whitePiecesTaken = 0;
 var blackPiecesTaken = 0;
 
-//Function creates table rows and cells
-//using a for loop and pushing to the "board" array
+//Creates table cells
 function createTable() {
   var $table = $('table')
   for (var i = 0; i < 8; i++) {
@@ -23,51 +22,41 @@ function createTable() {
       var $newTD = $('<td>')
       $newTD.addClass("tile")
       $newTr.append($newTD);
-      $board[i].push($newTD)
+      $board[i].push($newTD) //Add to board array
     }
     $table.append($newTr)
   }
 }
-//Calls createTable function
 createTable();
 
-//This function sets the boards alternating color properties
-//Simulatneously sets the pieces on the first three and last three rows of the board
-//Also simulatneously gives each table cell an id of rows and columns
+
 function setBoard(){
   for (var i = 0; i < $board.length; i++) {
     for (var j = 0; j < $board.length; j++) {
       if ((i+j)%2) {
-        //Sets board cell to color black & sets id on iteration
-        $board[i][j].addClass('black');
+        $board[i][j].addClass('black'); //sets colors and indexes board by row is and column js
         var newId = i+""+j;
-        $board[i][j].attr("id",newId);
+        $board[i][j].attr("id",newId); //adds index by id
         $board[i][j].click(function(){
-          alert("That's an invalid move.")
         })
 
-      } else {
-        //Sets board cell to color red  & sets id on iteration
+      } else { //red squares
         $redSquare = $board[i][j].addClass('red');
-        //addsId to cell
         var newId = i+""+j
         $board[i][j].attr("id",newId);
 
         $board[i][j].click(function(){
-          //Saves id (index) on click to check for valid diagonal moves
-          //on each click
-          //split function turns to string, must parseInt on push
           if (blackCounter%2 && whiteCounter%2){
-            var clickedRow = this.id.split("")[0]
-            var clickedColumn = this.id.split("")[1]
+            var row = this.id.split("")[0]
+            var col = this.id.split("")[1]
             console.log(this.id.split(""));
-            //Clears array on every move
+
+            var clickedRow = parseInt(row)
+            var clickedCol = parseInt(col)
             validDiagonalsW = [];
             validDiagonalsB = [];
-            console.log('diagonal arrays cleared');
-            //parseInt to add integer and store valid diagonal moves
-            validDiagonalsW.push((parseInt(clickedRow)+1)+""+(parseInt(clickedColumn)+1), (parseInt(clickedRow)+1)+""+(parseInt(clickedColumn)-1));
-            validDiagonalsB.push((parseInt(clickedRow)-1)+""+(parseInt(clickedColumn)+1), (parseInt(clickedRow)-1)+""+(parseInt(clickedColumn)-1));
+            validDiagonalsW.push((clickedRow+1)+""+(clickedCol+1), (clickedRow+1)+""+(clickedCol-1));
+            validDiagonalsB.push((clickedRow-1)+""+(clickedCol+1), (clickedRow-1)+""+(clickedCol-1));
             console.log('diagonal arrays set!');
             console.log(validDiagonalsB);
           }
@@ -87,23 +76,71 @@ function setBoard(){
 }
 setBoard()
 
-//Still need a way to keep one single variable to keep track of turns
 function makeMove(elem){
 
   var click = elem;
   var thisId = click.id.split("");
 
-  if (turn % 2) {
-    //on White's turn store index values of first click if white piece present
-    if ($(click).hasClass("whitePieces") && (whiteCounter%2 !== 0)) {
-        startingRow = thisId[0]
-        startingCol = thisId[1]
-      //add logic to check  for bad moves
-      //remove the white piece from spot update counter to keep track of move
-        $(click).removeClass("whitePieces");
-        whiteCounter = whiteCounter +1;
+  //Functions to take pieces
+        function takeBlackPiece(){
+          var attemptRow = thisId[0]
+          var attemptCol = thisId[1]
 
-        //on second click for white
+          var avgCol = ((parseInt(startingCol) + parseInt(attemptCol)) / 2)
+          var avgRow = ((parseInt(startingRow)+parseInt(attemptRow))/2);
+
+          var jump = "" + avgRow+''+avgCol
+
+          if ($('#'+jump).hasClass('blackPieces')) { //win move valid
+            $('#'+jump).removeClass('blackPieces'); //remove
+            blackPiecesTaken = blackPiecesTaken + 1;
+            $("#blackPiecesTaken").html(blackPiecesTaken)
+            if (blackPiecesTaken == 12) {
+              alert("Player 2 wins!")
+            }
+            console.log(blackPiecesTaken);
+
+            $(click).addClass("whitePieces");
+            whiteCounter = whiteCounter + 1;
+            turn++;
+            console.log("It's Player 1's turn");
+        }
+      }
+        function takeWhitePiece (){
+          var attemptRow = thisId[0]
+          var attemptCol = thisId[1]
+          var avgCol = ((parseInt(startingCol) + parseInt(attemptCol)) / 2)
+          var avgRow = ((parseInt(startingRow)+parseInt(attemptRow))/2);
+          var jump = "" + avgRow+''+avgCol
+
+          if ($('#'+jump).hasClass('whitePieces')) {
+            console.log("Win move valid");
+            $('#'+jump).removeClass('whitePieces');
+            whitePiecesTaken = whitePiecesTaken + 1;
+            $("#whitePiecesTaken").html(whitePiecesTaken)
+            if (whitePiecesTaken == 12) {
+              alert("Player 1 wins!")
+            }
+            $(click).addClass("blackPieces")
+            blackCounter = blackCounter +1
+            turn++;
+            console.log("It's Player 2's turn");
+        }
+        }
+
+
+
+  if (turn % 2) {
+    //Player 2 first click
+    if ($(click).hasClass("whitePieces") && (whiteCounter%2 !== 0)) {
+        startingRow = thisId[0] //store row
+        startingCol = thisId[1] //store col
+
+
+        $(click).removeClass("whitePieces"); //remove
+        whiteCounter = whiteCounter +1; // increment click count
+
+        //on Player 2 second click
       } else if(!$(click).hasClass('whitePieces') && whiteCounter%2 == 0) {
 
         //if red space, not on black piece, and move is diagonal, add white piece
@@ -148,52 +185,6 @@ function makeMove(elem){
         } else if ($(click).hasClass("whitePieces")) {
           alert("Sorry, it's not your turn.")
         }
-      }
-
-//Functions to take pieces
-      function takeBlackPiece(){
-        var attemptRow = thisId[0]
-        var attemptCol = thisId[1]
-
-        var avgCol = ((parseInt(startingCol) + parseInt(attemptCol)) / 2)
-        var avgRow = ((parseInt(startingRow)+parseInt(attemptRow))/2);
-
-        var jump = "" + avgRow+''+avgCol
-
-        if ($('#'+jump).hasClass('blackPieces')) {
-          console.log("Win move valid");
-          $('#'+jump).removeClass('blackPieces');
-          blackPiecesTaken = blackPiecesTaken + 1;
-          if (blackPiecesTaken == 12) {
-            alert("Player 2 wins!")
-          }
-          console.log(blackPiecesTaken);
-
-          $(click).addClass("whitePieces");
-          whiteCounter = whiteCounter + 1;
-          turn++;
-          console.log("It's Player 1's turn");
-      }
-    }
-      function takeWhitePiece (){
-        var attemptRow = thisId[0]
-        var attemptCol = thisId[1]
-        var avgCol = ((parseInt(startingCol) + parseInt(attemptCol)) / 2)
-        var avgRow = ((parseInt(startingRow)+parseInt(attemptRow))/2);
-        var jump = "" + avgRow+''+avgCol
-
-        if ($('#'+jump).hasClass('whitePieces')) {
-          console.log("Win move valid");
-          $('#'+jump).removeClass('whitePieces');
-          whitePiecesTaken = whitePiecesTaken + 1;
-          if (whitePiecesTaken == 12) {
-            alert("Player 1 wins")
-          }
-          $(click).addClass("blackPieces")
-          blackCounter = blackCounter +1
-          turn++;
-          console.log("It's Player 2's turn");
-      }
       }
 
 

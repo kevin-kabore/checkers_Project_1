@@ -8,14 +8,23 @@
 <body>
 <h1>Kev's Checkers Game</h1>
 
-<button>Restart Game</button>
+<button <input type="button" value="Refresh Page" onClick="window.location.reload()">Restart Game</button>
 
 
-<div></div>
+<!-- <section>
+  <h2>Instructions</h2>
+  <ul>
+    <li></li>
+  </ul>
+</section> -->
 
 <div>
-  <section id="left">Pieces Taken</section>
-  <section id="right">Pieces Taken</section>
+  <section id="left" class="black">
+    Player 1 score:    <h2 id="whitePiecesTaken">0</h2>
+  </section>
+  <section id="right">Player 2 score:
+    <h2 id="blackPiecesTaken">0</h2>
+  </section>
   <table>
   </table>
 </div>
